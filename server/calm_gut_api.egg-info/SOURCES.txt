@@ -1,7 +1,6 @@
 pyproject.toml
 app/__init__.py
 app/constants.py
-app/main.py
 app/ai/__init__.py
 app/ai/chat_engine.py
 app/ai/gemini.py
