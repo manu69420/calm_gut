@@ -17,6 +17,9 @@ class MessageRepository {
         toFirestore: (Message message, _) => message.toFirestore(),
       );
 
+  DocumentReference<Map<String, dynamic>> get _chat =>
+      FirebaseFirestore.instance.collection('chats').doc(chatId);
+
   DocumentSnapshot<Message>? _lastMessage;
   bool _hasMoreChats = true;
   final List<List<Message>> _allPagedMessages = [];
@@ -38,6 +41,10 @@ class MessageRepository {
     try {
       final messages = _messages;
       await messages.doc().set(message);
+      _chat.get().then((doc) {
+        final data = doc.data();
+        _chat.set({"message_count": 1 + data?["message_count"]});
+      });
     } on FirebaseException catch (e) {
       print('#DEBUG IN [sendMessage]#: ERROR(${e.code}): $e');
       throw FirestoreDatabaseFailure.fromCode(e.code);
