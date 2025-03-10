@@ -9,7 +9,7 @@ import pathlib
 from app.constants import *
 from app.models import Message, Chat
 
-basedir = pathlib.Path(__file__).parents[1]
+basedir = pathlib.Path(__file__).parents[2]
 load_dotenv(basedir / ".env")
 
 app = firebase_admin.initialize_app()
