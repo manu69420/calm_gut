@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "842172376972",
+    "project_id": "calm-gut",
+    "storage_bucket": "calm-gut.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842172376972:android:f3434c4134327c8ea758a9",
+        "android_client_info": {
+          "package_name": "com.calm_gut.app.calm_gut"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4GS4IwKbGvcLuIeW8IWHue_g9G6vfQLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
