@@ -3,14 +3,17 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:calm_gut/repository/message_repository/src/exceptions/exception.dart';
 import 'package:calm_gut/repository/message_repository/src/models/models.dart';
+import 'package:chat_api/chat_api_client.dart';
 
 class MessageRepository {
-  MessageRepository({required this.chatId});
-  final String chatId;
+  MessageRepository({required String chatId}) : _chatId = chatId;
+  final String _chatId;
+
+  String get chatId => _chatId;
 
   CollectionReference<Message> get _messages => FirebaseFirestore.instance
       .collection('chats')
-      .doc(chatId)
+      .doc(_chatId)
       .collection('messages')
       .withConverter(
         fromFirestore: Message.fromFirestore,
@@ -18,7 +21,7 @@ class MessageRepository {
       );
 
   DocumentReference<Map<String, dynamic>> get _chat =>
-      FirebaseFirestore.instance.collection('chats').doc(chatId);
+      FirebaseFirestore.instance.collection('chats').doc(_chatId);
 
   DocumentSnapshot<Message>? _lastMessage;
   bool _hasMoreChats = true;
@@ -28,7 +31,7 @@ class MessageRepository {
 
   bool get hasMoreChats => _hasMoreChats;
 
-  Future<void> sendMessage({
+  void sendMessage({
     required String text,
     required String authorId,
     required String chatId,
@@ -53,11 +56,14 @@ class MessageRepository {
     }
   }
 
-  Future<void> getResponse({
-    required String text,
-    required String authorId,
-    required String chatId,
-  }) async {}
+  Future<void> getResponse() async {
+    final chatApiClient = ChatApiClient();
+    try {
+      await chatApiClient.getResponse(chatId: _chatId);
+    } catch (_) {
+      throw Exception("Unable to get a response");
+    }
+  }
 
   void _requestMessages() {
     var pageMessagesQuery = _messages
@@ -100,9 +106,6 @@ class MessageRepository {
 
   Stream<List<Message>> messagesStream() {
     _requestMessages();
-    print(
-      'in messagesStream: _allPagedMessages.length=${_allPagedMessages.length}',
-    );
     return _messagesController.stream;
   }
 

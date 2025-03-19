@@ -66,6 +66,8 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
   }
 
   Align _buildSendContainer(BuildContext context) {
+    final waitingResponse = context.read<ChatBloc>().state.waitingResponse;
+    final canSend = !waitingResponse && _messageController.text.isNotEmpty;
     return Align(
       alignment: Alignment(0, 1),
       child: Container(
@@ -83,9 +85,14 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
                 ),
                 controller: _messageController,
                 onSubmitted: (value) => _sendMessage,
+                enabled: !waitingResponse,
+                onChanged: (value) => setState(() {}),
               ),
             ),
-            IconButton(onPressed: _sendMessage, icon: Icon(Icons.send)),
+            IconButton(
+              onPressed: canSend ? _sendMessage : null,
+              icon: Icon(Icons.send),
+            ),
           ],
         ),
       ),
@@ -150,6 +157,7 @@ class _MessagesBuilder extends StatelessWidget {
               currentUserId:
                   context.read<AuthenticationRepository>().currentUser.id,
               scrollController: _scrollController,
+              waitingResponse: state.waitingResponse,
             );
         }
       },

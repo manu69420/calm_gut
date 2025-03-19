@@ -151,6 +151,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  chat_api:
+    dependency: "direct main"
+    description:
+      path: "packages/chat_api"
+      relative: true
+    source: path
+    version: "0.0.1"
   checked_yaml:
     dependency: transitive
     description:
@@ -332,6 +339,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  flutter_spinkit:
+    dependency: "direct main"
+    description:
+      name: flutter_spinkit
+      sha256: d2696eed13732831414595b98863260e33e8882fc069ee80ec35d4ac9ddb0472
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter

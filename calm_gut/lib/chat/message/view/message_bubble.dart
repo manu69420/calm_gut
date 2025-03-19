@@ -2,6 +2,7 @@ import 'package:calm_gut/chat/message/view/bubble_clips.dart';
 import 'package:calm_gut/repository/message_repository/message_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 enum MessageAlignment {
   left,
@@ -19,12 +20,14 @@ class MessageBubble extends StatelessWidget {
     this.prevDifferent = true,
     this.nextDifferent = true,
     this.messageAlignment = MessageAlignment.right,
+    this.waitingResponse = false,
   });
 
   final Message message;
   final bool nextDifferent;
   final bool prevDifferent;
   final MessageAlignment messageAlignment;
+  final bool waitingResponse;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,7 @@ class MessageBubble extends StatelessWidget {
       message: message,
       onRight: messageAlignment.isRight,
       prevDifferent: prevDifferent,
+      waitingResponse: waitingResponse,
     );
   }
 }
@@ -43,12 +47,14 @@ class _Bubble extends StatelessWidget {
     required this.message,
     this.onRight = true,
     this.prevDifferent = false,
+    this.waitingResponse = false,
   });
 
   final bool withTail;
   final Message message;
   final bool onRight;
   final bool prevDifferent;
+  final bool waitingResponse;
 
   @override
   Widget build(BuildContext context) {
@@ -78,22 +84,27 @@ class _Bubble extends StatelessWidget {
           child: SizedBox(
             child: Stack(
               children: [
-                RichText(
-                  text: TextSpan(
-                    text: message.text,
-                    style: DefaultTextStyle.of(context).style,
-                    children: [
-                      TextSpan(
-                        text: ' ${message.createdAt.time()}',
-                        style: TextStyle(
-                          color: Colors.transparent,
-                          fontSize: 7,
-                          letterSpacing: 3,
-                        ),
+                !waitingResponse
+                    ? RichText(
+                      text: TextSpan(
+                        text: message.text,
+                        style: DefaultTextStyle.of(context).style,
+                        children: [
+                          TextSpan(
+                            text: ' ${message.createdAt.time()}',
+                            style: TextStyle(
+                              color: Colors.transparent,
+                              fontSize: 7,
+                              letterSpacing: 3,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
+                    )
+                    : SpinKitThreeBounce(
+                      color: Theme.of(context).colorScheme.onSecondaryContainer,
+                      size: 16,
+                    ),
                 Positioned(
                   bottom: -4,
                   right: 0,

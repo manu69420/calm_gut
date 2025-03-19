@@ -26,3 +26,7 @@ def get_response(chat_id: str):
     )
 
     firestore.send_message(str(response))
+
+@app.get('/hello')
+def hello():
+    return {'message': 'hello'}

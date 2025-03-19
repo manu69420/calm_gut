@@ -1,5 +1,6 @@
 import 'package:calm_gut/chat/message/view/message_bubble.dart';
 import 'package:calm_gut/repository/message_repository/src/models/message.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ChatBuilder extends StatelessWidget {
@@ -8,14 +9,22 @@ class ChatBuilder extends StatelessWidget {
     required this.messages,
     required this.currentUserId,
     this.scrollController,
-  });
+    bool? waitingResponse,
+  }) : _waitingResponse = waitingResponse ?? false;
 
   final List<Message> messages;
   final String currentUserId;
   final ScrollController? scrollController;
+  final bool _waitingResponse;
 
   @override
   Widget build(BuildContext context) {
+    if (_waitingResponse) {
+      messages.insert(
+        0,
+        Message(authorId: 'bot_id', createdAt: Timestamp.now(), text: ""),
+      );
+    }
     return _WidgetWithShaders(
       widget: ListView.separated(
         controller: scrollController,
@@ -34,6 +43,7 @@ class ChatBuilder extends StatelessWidget {
                 messages[index].authorId == currentUserId
                     ? MessageAlignment.right
                     : MessageAlignment.left,
+            waitingResponse: _waitingResponse && index == 0,
           );
         },
         separatorBuilder: (context, index) {

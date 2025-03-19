@@ -58,12 +58,15 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     }
   }
 
-  void _onSent(MessageSent event, Emitter<ChatState> emit) {
+  Future<void> _onSent(MessageSent event, Emitter<ChatState> emit) async {
     _messageRepository.sendMessage(
       text: event.text,
       authorId: event.authorId,
       chatId: _messageRepository.chatId,
     );
     _chatRepository.updateCreatedTime(chatId: _messageRepository.chatId);
+    emit(state.copyWith(waitingResponse: true));
+    await _messageRepository.getResponse();
+    emit(state.copyWith(waitingResponse: false));
   }
 }
