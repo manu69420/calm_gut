@@ -1,7 +1,9 @@
+import 'package:calm_gut/chat/bloc/chat_bloc.dart';
 import 'package:calm_gut/chat/message/view/message_bubble.dart';
+import 'package:calm_gut/core/widgets/shimmer.dart';
 import 'package:calm_gut/repository/message_repository/src/models/message.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatBuilder extends StatelessWidget {
   const ChatBuilder({
@@ -19,12 +21,6 @@ class ChatBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (_waitingResponse) {
-      messages.insert(
-        0,
-        Message(authorId: 'bot_id', createdAt: Timestamp.now(), text: ""),
-      );
-    }
     return _WidgetWithShaders(
       widget: ListView.separated(
         controller: scrollController,

@@ -1,4 +1,5 @@
 import 'package:calm_gut/chat/message/view/bubble_clips.dart';
+import 'package:calm_gut/core/widgets/shimmer.dart';
 import 'package:calm_gut/repository/message_repository/message_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -61,61 +62,59 @@ class _Bubble extends StatelessWidget {
     return Container(
       margin: _getBubbleMargins(),
       alignment: onRight ? Alignment.topRight : Alignment.topLeft,
-      child: PhysicalShape(
-        clipper: ChatBubbleClipWithTail(
-          leftRadius: onRight ? 20 : 5,
-          rightRadius: onRight ? 5 : 20,
-          tailRadiusAndOffset: 5,
-          tailOnRight: onRight,
-          showTail: withTail,
-          upperRightRadius: onRight && prevDifferent ? 20 : null,
-          upperLeftRadius: !onRight && prevDifferent ? 20 : null,
-        ),
-        elevation: 2,
-        color:
-            onRight
-                ? Theme.of(context).colorScheme.primaryContainer
-                : Theme.of(context).colorScheme.secondaryContainer,
-        child: Padding(
-          padding:
+      child: ShimmerLoading(
+        isLoading: waitingResponse,
+        child: PhysicalShape(
+          clipper: ChatBubbleClipWithTail(
+            leftRadius: onRight ? 20 : 5,
+            rightRadius: onRight ? 5 : 20,
+            tailRadiusAndOffset: 5,
+            tailOnRight: onRight,
+            showTail: withTail,
+            upperRightRadius: onRight && prevDifferent ? 20 : null,
+            upperLeftRadius: !onRight && prevDifferent ? 20 : null,
+          ),
+          elevation: 2,
+          color:
               onRight
-                  ? EdgeInsets.fromLTRB(15, 10, 20, 15)
-                  : EdgeInsets.fromLTRB(20, 10, 35, 15),
-          child: SizedBox(
-            child: Stack(
-              children: [
-                !waitingResponse
-                    ? RichText(
-                      text: TextSpan(
-                        text: message.text,
-                        style: DefaultTextStyle.of(context).style,
-                        children: [
-                          TextSpan(
-                            text: ' ${message.createdAt.time()}',
-                            style: TextStyle(
-                              color: Colors.transparent,
-                              fontSize: 7,
-                              letterSpacing: 3,
-                            ),
+                  ? Theme.of(context).colorScheme.primaryContainer
+                  : Theme.of(context).colorScheme.secondaryContainer,
+          child: Padding(
+            padding:
+                onRight
+                    ? EdgeInsets.fromLTRB(15, 10, 20, 15)
+                    : EdgeInsets.fromLTRB(20, 10, 35, 15),
+            child: SizedBox(
+              child: Stack(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: message.text,
+                      style: DefaultTextStyle.of(context).style,
+                      children: [
+                        TextSpan(
+                          text: ' ${message.createdAt.time()}',
+                          style: TextStyle(
+                            color: Colors.transparent,
+                            fontSize: 7,
+                            letterSpacing: 3,
                           ),
-                        ],
-                      ),
-                    )
-                    : SpinKitThreeBounce(
-                      color: Theme.of(context).colorScheme.onSecondaryContainer,
-                      size: 16,
-                    ),
-                Positioned(
-                  bottom: -4,
-                  right: 0,
-                  child: Text(
-                    message.createdAt.time(),
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
+                  Positioned(
+                    bottom: -4,
+                    right: 0,
+                    child: Text(
+                      message.createdAt.time(),
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:calm_gut/chat/bloc/chat_bloc.dart';
 import 'package:calm_gut/chat/view/chat_builder.dart';
 import 'package:calm_gut/core/widgets/error_card.dart';
+import 'package:calm_gut/core/widgets/shimmer.dart';
 import 'package:calm_gut/repository/chat_repository/src/chat_repository.dart';
 import 'package:calm_gut/repository/message_repository/src/message_repository.dart';
 import 'package:flutter/material.dart';
@@ -54,14 +55,25 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.chatName)),
-      body: Column(
-        children: [
-          Expanded(
-            child: _MessagesBuilder(scrollController: _scrollController),
-          ),
-          _buildSendContainer(context),
-        ],
+      body: Shimmer(
+        linearGradient: shimmerGradient,
+        child: Column(
+          children: [
+            Expanded(
+              child: _MessagesBuilder(scrollController: _scrollController),
+            ),
+            _buildSendContainer(context),
+          ],
+        ),
       ),
+      // body: Column(
+      //   children: [
+      //     Expanded(
+      //       child: _MessagesBuilder(scrollController: _scrollController),
+      //     ),
+      //     _buildSendContainer(context),
+      //   ],
+      // ),
     );
   }
 

@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:calm_gut/repository/chat_repository/chat_repository.dart';
 import 'package:calm_gut/repository/message_repository/message_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart' show Timestamp;
 import 'package:equatable/equatable.dart';
 import 'package:stream_transform/stream_transform.dart';
 
@@ -69,8 +68,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     try {
       emit(state.copyWith(waitingResponse: true));
       await _messageRepository.getResponse();
-      state.messages?.removeAt(0);
-      emit(state.copyWith(waitingResponse: false, messages: state.messages));
+      emit(state.copyWith(waitingResponse: false));
     } catch (_) {
       emit(state.copyWith(errorGettingResponse: true));
     }
