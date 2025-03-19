@@ -9,6 +9,7 @@ final class ChatState extends Equatable {
     this.status = ChatStatus.initial,
     this.hasReachedMax = false,
     this.waitingResponse = false,
+    this.errorGettingResponse = false,
   });
 
   final Chat chat;
@@ -16,6 +17,7 @@ final class ChatState extends Equatable {
   final ChatStatus status;
   final bool hasReachedMax;
   final bool waitingResponse;
+  final bool errorGettingResponse;
 
   ChatState copyWith({
     Chat? chat,
@@ -23,6 +25,7 @@ final class ChatState extends Equatable {
     ChatStatus? status,
     bool? hasReachedMax,
     bool? waitingResponse,
+    bool? errorGettingResponse,
   }) {
     return ChatState(
       chat: chat ?? this.chat,
@@ -30,6 +33,7 @@ final class ChatState extends Equatable {
       status: status ?? this.status,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
       waitingResponse: waitingResponse ?? this.waitingResponse,
+      errorGettingResponse: errorGettingResponse ?? this.errorGettingResponse,
     );
   }
 
@@ -40,9 +44,10 @@ final class ChatState extends Equatable {
     status,
     hasReachedMax,
     waitingResponse,
+    errorGettingResponse,
   ];
 
   @override
   String toString() =>
-      'MessageState { number of messages: ${messages?.length}, status: $status, hasReachedMax: $hasReachedMax, waitingResponse: $waitingResponse }';
+      'MessageState { number of messages: ${messages?.length}, status: $status, hasReachedMax: $hasReachedMax, waitingResponse: $waitingResponse, errorGettingResponse: $errorGettingResponse }';
 }

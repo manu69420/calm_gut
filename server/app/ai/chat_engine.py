@@ -15,7 +15,7 @@ New Messages:
 {new_messages}
 
 Instructions:
-1. Carefully review the previous summary and the new messages.
+1. Carefully review the previous summary and the new messages, but don't overly emphasize that you were provided with a summary and new messages. 
 2. Identify the key topics, decisions, and important information discussed in the new messages.
 3. Integrate this new information into the previous summary to create an updated summary.
 4. Ensure the updated summary is coherent, concise, and accurately reflects the entire conversation so far.
