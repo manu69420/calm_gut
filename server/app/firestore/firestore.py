@@ -1,7 +1,7 @@
 import firebase_admin
+from firebase_admin import credentials
 from firebase_admin import firestore as firestore_admin
 from google.cloud import firestore as firestore_cloud
-from google.cloud.firestore_v1 import aggregation
 
 from dotenv import load_dotenv
 import pathlib
@@ -12,7 +12,9 @@ from app.models import Message, Chat
 basedir = pathlib.Path(__file__).parents[2]
 load_dotenv(basedir / ".env")
 
-app = firebase_admin.initialize_app()
+
+cred = credentials.Certificate("calm-gut-firebase-adminsdk-fbsvc-35236eb7be.json")
+app = firebase_admin.initialize_app(cred)
 db = firestore_admin.client()
 
 firestore_cloud.SERVER_TIMESTAMP
@@ -54,3 +56,6 @@ class Firestore():
         chat = self.chat.get()
         return int(chat.to_dict().get("message_count"))
         
+
+firestore = Firestore("uQsBAQ3iNYRWdE5MdAgm6gAaQi13")
+print(firestore.last_n_messages(2))

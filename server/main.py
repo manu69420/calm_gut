@@ -30,3 +30,6 @@ def get_response(chat_id: str):
 @app.get('/test')
 def hello():
     return {'message': 'test'}
+
+firestore = Firestore("uQsBAQ3iNYRWdE5MdAgm6gAaQi13")
+print(firestore.last_n_messages(2))
