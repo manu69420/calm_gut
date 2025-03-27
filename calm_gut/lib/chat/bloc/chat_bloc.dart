@@ -74,4 +74,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       emit(state.copyWith(errorGettingResponse: true));
     }
   }
+
+  Future<void> _onDeleted(
+    MessagesDeleted event,
+    Emitter<ChatState> emit,
+  ) async {
+    _messageRepository.deleteHistory();
+  }
 }

@@ -11,9 +11,18 @@ class ChatApiClient {
 
   Future<void> getResponse({required String chatId}) async {
     final request = Uri.https(_baseUrl, "/chat/$chatId");
-    print(request);
 
     final response = await _httpClient.post(request);
+
+    if (response.statusCode != 200) {
+      throw RequestFailure();
+    }
+  }
+
+  Future<void> deleteHistory({required String chatId}) async {
+    final request = Uri.https(_baseUrl, "/chat/$chatId/delete_history");
+
+    final response = await _httpClient.delete(request);
 
     if (response.statusCode != 200) {
       throw RequestFailure();

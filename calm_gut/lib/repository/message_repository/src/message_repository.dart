@@ -104,6 +104,15 @@ class MessageRepository {
     });
   }
 
+  Future<void> deleteHistory() async {
+    final chatApiClient = ChatApiClient();
+    try {
+      await chatApiClient.deleteHistory(chatId: _chatId);
+    } catch (_) {
+      throw Exception("Unable to get a response");
+    }
+  }
+
   Stream<List<Message>> messagesStream() {
     _requestMessages();
     return _messagesController.stream;

@@ -46,7 +46,6 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
 
   @override
   void initState() {
-    // _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
     _scrollController.addListener(_onScroll);
     super.initState();
   }
@@ -75,7 +74,9 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
                         child: const Text("Forget"),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _deleteHistory(context);
+                        },
                         child: const Text("Confirm"),
                       ),
                     ],
@@ -99,6 +100,10 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
         ),
       ),
     );
+  }
+
+  void _deleteHistory(BuildContext context) {
+    context.read<ChatBloc>().add(MessagesDeleted());
   }
 
   Align _buildSendContainer(BuildContext context) {
