@@ -27,9 +27,18 @@ def get_response(chat_id: str):
 
     firestore.send_message(str(response))
 
-@app.get('/test')
-def hello():
-    return {'message': 'test'}
+@app.delete('/chat/{chat_id}/delete_history')
+async def delete_history(coll_ref, batch_size):
+    messages = firestore.messages
+    docs = messages.limit(batch_size).stream()
+    deleted = 0
+
+    async for doc in docs:
+        await doc.reference.delete()
+        deleted = deleted + 1
+
+    if deleted >= batch_size:
+        return delete_history(coll_ref, batch_size)
 
 firestore = Firestore("uQsBAQ3iNYRWdE5MdAgm6gAaQi13")
 print(firestore.last_n_messages(2))

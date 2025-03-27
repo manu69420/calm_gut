@@ -28,6 +28,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       // transformer: throttleDroppable(throttleDuration),
     );
     on<MessageSent>(_onSent);
+    on<MessagesDeleted>(_onDeleted);
   }
   final MessageRepository _messageRepository;
   final ChatRepository _chatRepository;

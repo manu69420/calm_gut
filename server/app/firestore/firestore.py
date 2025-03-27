@@ -22,17 +22,17 @@ firestore_cloud.SERVER_TIMESTAMP
 class Firestore():
     def __init__(self, chat_id) -> None:
         self.chat = db.collection(chats_collection).document(chat_id)
+        self.messages = self.chat.collection(messages_collection)
 
     def send_message(self, text:str) -> None:
         '''Creates a message document in Firestore'''
-        messages = self.chat.collection(messages_collection)
 
         message = Message(
                 author_id="bot_id", 
                 text=text,
                 created_at=firestore_cloud.SERVER_TIMESTAMP
             )
-        messages.document().set(message.to_dict())
+        self.messages.document().set(message.to_dict())
         
         chat = self.chat.get()
         if chat.exists:

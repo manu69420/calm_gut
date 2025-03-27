@@ -18,3 +18,5 @@ final class MessageSent extends ChatEvent {
   @override
   List<Object> get props => [text, authorId];
 }
+
+final class MessagesDeleted extends ChatEvent {}

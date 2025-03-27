@@ -54,7 +54,39 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.chatName)),
+      appBar: AppBar(
+        title: Text(widget.chatName),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog<void>(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text("Delete chat's history"),
+                    content: const Text(
+                      "Do you want to delete chat's messages?",
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Forget"),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text("Confirm"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            icon: Icon(Icons.delete),
+          ),
+        ],
+      ),
       body: Shimmer(
         linearGradient: shimmerGradient,
         child: Column(
@@ -66,14 +98,6 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
           ],
         ),
       ),
-      // body: Column(
-      //   children: [
-      //     Expanded(
-      //       child: _MessagesBuilder(scrollController: _scrollController),
-      //     ),
-      //     _buildSendContainer(context),
-      //   ],
-      // ),
     );
   }
 
