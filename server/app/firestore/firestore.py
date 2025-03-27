@@ -34,9 +34,7 @@ class Firestore():
             )
         self.messages.document().set(message.to_dict())
         
-        chat = self.chat.get()
-        if chat.exists:
-            self.chat.update({"message_count": 1 + chat.to_dict()["message_count"]})
+        self.update_messages_count(1 + self.messages_count())
         
     def update_summary(self, new_summary:str):
         self.chat.update({"summary": new_summary})
@@ -55,7 +53,21 @@ class Firestore():
     def messages_count(self):
         chat = self.chat.get()
         return int(chat.to_dict().get("message_count"))
-        
+    
+    def update_messages_count(self, messages_count:int):
+        self.chat.update({"message_count": messages_count})
 
-firestore = Firestore("uQsBAQ3iNYRWdE5MdAgm6gAaQi13")
-print(firestore.last_n_messages(2))
+    def delete_collection(self, coll_ref, batch_size):
+        if batch_size == 0:
+            return
+
+        docs = coll_ref.list_documents(page_size=batch_size)
+        deleted = 0
+
+        for doc in docs:
+            print(f"Deleting doc {doc.id} => {doc.get().to_dict()}")
+            doc.delete()
+            deleted = deleted + 1
+
+        if deleted >= batch_size:
+            return self.delete_collection(coll_ref, batch_size)

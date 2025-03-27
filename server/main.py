@@ -28,19 +28,7 @@ def get_response(chat_id: str):
     firestore.send_message(str(response))
 
 @app.delete('/chat/{chat_id}/delete_history')
-async def delete_history(chat_id: str):
+def delete_history(chat_id: str):
     firestore = Firestore(chat_id=chat_id)
-    await recursive_delete(firestore.messages, firestore.messages_count())
-
-async def recursive_delete(coll_ref, batch_size):
-    docs = coll_ref.limit(batch_size).stream()
-    deleted = 0
-
-    async for doc in docs:
-        await doc.reference.delete()
-        deleted = deleted + 1
-
-    if deleted >= batch_size:
-        return recursive_delete(coll_ref, batch_size)
-
-# await delete_history("uQsBAQ3iNYRWdE5MdAgm6gAaQi13")
+    firestore.delete_collection(firestore.messages, firestore.messages_count())
+    firestore.update_messages_count(0)
