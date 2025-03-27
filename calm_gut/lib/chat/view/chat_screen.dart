@@ -103,7 +103,31 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
   }
 
   void _deleteHistory(BuildContext context) {
-    context.read<ChatBloc>().add(MessagesDeleted());
+    final colorScheme = Theme.of(context).colorScheme;
+    try {
+      context.read<ChatBloc>().add(MessagesDeleted());
+      Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Chat history successfully deleted",
+            style: TextStyle(color: colorScheme.onTertiary),
+          ),
+          backgroundColor: colorScheme.tertiary,
+        ),
+      );
+    } catch (_) {
+      Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Couldn't delete chat's history",
+            style: TextStyle(color: colorScheme.onError),
+          ),
+          backgroundColor: colorScheme.error,
+        ),
+      );
+    }
   }
 
   Align _buildSendContainer(BuildContext context) {
