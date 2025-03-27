@@ -1,5 +1,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:calm_gut/chat/bloc/chat_bloc.dart';
+import 'package:calm_gut/chat/deletion/cubit/deletion_cubit.dart';
+import 'package:calm_gut/chat/deletion/delete_dialog.dart';
 import 'package:calm_gut/chat/view/chat_builder.dart';
 import 'package:calm_gut/core/widgets/error_card.dart';
 import 'package:calm_gut/core/widgets/shimmer.dart';
@@ -44,9 +46,13 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
   final _messageController = TextEditingController();
   final _scrollController = ScrollController();
 
+  late final ChatBloc chatBloc;
+
   @override
   void initState() {
     _scrollController.addListener(_onScroll);
+    chatBloc = context.read<ChatBloc>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
     super.initState();
   }
 
@@ -59,27 +65,25 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
           IconButton(
             onPressed: () {
               showDialog<void>(
+                barrierDismissible: false,
                 context: context,
                 builder: (context) {
-                  return AlertDialog(
-                    title: const Text("Delete chat's history"),
-                    content: const Text(
-                      "Do you want to delete chat's messages?",
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text("Forget"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          _deleteHistory(context);
-                        },
-                        child: const Text("Confirm"),
+                  final chatId =
+                      context.read<AuthenticationRepository>().currentUser.id;
+                  return MultiBlocProvider(
+                    providers: [
+                      BlocProvider.value(value: chatBloc),
+                      BlocProvider<DeletionCubit>(
+                        create:
+                            (context) => DeletionCubit(
+                              messageRepository: MessageRepository(
+                                chatId: chatId,
+                              ),
+                              chatBloc: chatBloc,
+                            ),
                       ),
                     ],
+                    child: DeleteDialog(),
                   );
                 },
               );
@@ -100,34 +104,6 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
         ),
       ),
     );
-  }
-
-  void _deleteHistory(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    try {
-      context.read<ChatBloc>().add(MessagesDeleted());
-      Navigator.of(context).pop();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Chat history successfully deleted",
-            style: TextStyle(color: colorScheme.onTertiary),
-          ),
-          backgroundColor: colorScheme.tertiary,
-        ),
-      );
-    } catch (_) {
-      Navigator.of(context).pop();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Couldn't delete chat's history",
-            style: TextStyle(color: colorScheme.onError),
-          ),
-          backgroundColor: colorScheme.error,
-        ),
-      );
-    }
   }
 
   Align _buildSendContainer(BuildContext context) {
@@ -212,6 +188,8 @@ class _MessagesBuilder extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           case ChatStatus.failure:
             return ErrorCard();
+          case ChatStatus.empty:
+            return _EmptyMessagesView();
           case ChatStatus.success:
             final messages = state.messages;
             if (messages != null && messages.isEmpty) {

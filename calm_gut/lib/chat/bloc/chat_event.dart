@@ -19,4 +19,4 @@ final class MessageSent extends ChatEvent {
   List<Object> get props => [text, authorId];
 }
 
-final class MessagesDeleted extends ChatEvent {}
+final class MessagesClear extends ChatEvent {}

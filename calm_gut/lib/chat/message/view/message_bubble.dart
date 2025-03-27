@@ -3,7 +3,6 @@ import 'package:calm_gut/core/widgets/shimmer.dart';
 import 'package:calm_gut/repository/message_repository/message_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 enum MessageAlignment {
   left,

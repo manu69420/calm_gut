@@ -28,8 +28,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       // transformer: throttleDroppable(throttleDuration),
     );
     on<MessageSent>(_onSent);
-    on<MessagesDeleted>(_onDeleted);
+    on<MessagesClear>(_onClearMessages);
   }
+
   final MessageRepository _messageRepository;
   final ChatRepository _chatRepository;
 
@@ -65,20 +66,20 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       authorId: event.authorId,
       chatId: _messageRepository.chatId,
     );
+    add(MessagesFetched());
     _chatRepository.updateCreatedTime(chatId: _messageRepository.chatId);
     try {
       emit(state.copyWith(waitingResponse: true));
-      await _messageRepository.getResponse();
+      // await _messageRepository.getResponse();
       emit(state.copyWith(waitingResponse: false));
     } catch (_) {
       emit(state.copyWith(errorGettingResponse: true));
     }
+    add(MessagesFetched());
   }
 
-  Future<void> _onDeleted(
-    MessagesDeleted event,
-    Emitter<ChatState> emit,
-  ) async {
-    _messageRepository.deleteHistory();
+  void _onClearMessages(MessagesClear event, Emitter<ChatState> emit) async {
+    state.messages?.clear();
+    emit(state.copyWith(status: ChatStatus.empty, messages: List.empty()));
   }
 }

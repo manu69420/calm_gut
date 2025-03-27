@@ -1,9 +1,6 @@
-import 'package:calm_gut/chat/bloc/chat_bloc.dart';
 import 'package:calm_gut/chat/message/view/message_bubble.dart';
-import 'package:calm_gut/core/widgets/shimmer.dart';
 import 'package:calm_gut/repository/message_repository/src/models/message.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatBuilder extends StatelessWidget {
   const ChatBuilder({
