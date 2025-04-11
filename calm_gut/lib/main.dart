@@ -9,7 +9,13 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = const AppBlocObserver();
 
-  await Firebase.initializeApp();
+  final firestore = const FirebaseOptions(
+    apiKey: "AIzaSyACDf0YQ1ezDwE_QltyJsdyn2xCWgou_8Y",
+    appId: "1:842172376972:android:f3434c4134327c8ea758a9",
+    messagingSenderId: "682609745797",
+    projectId: 'calm-gut',
+  );
+  await Firebase.initializeApp(options: firestore);
 
   final authenticationRepository = AuthenticationRepository();
   await authenticationRepository.user.first;
