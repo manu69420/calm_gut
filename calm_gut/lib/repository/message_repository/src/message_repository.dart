@@ -46,7 +46,8 @@ class MessageRepository {
       await messages.doc().set(message);
       _chat.get().then((doc) {
         final data = doc.data();
-        _chat.set({"message_count": 1 + data?["message_count"]});
+        final int? messagesCount = data?["message_count"];
+        _chat.set({"message_count": 1 + (messagesCount ?? 0)});
       });
     } on FirebaseException catch (e) {
       print('#DEBUG IN [sendMessage]#: ERROR(${e.code}): $e');

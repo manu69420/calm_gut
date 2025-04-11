@@ -32,3 +32,5 @@ def delete_history(chat_id: str):
     firestore = Firestore(chat_id=chat_id)
     firestore.delete_collection(firestore.messages, firestore.messages_count())
     firestore.update_messages_count(0)
+
+get_response("1UxWfxy1vRQGepCb53GFTOljTHf2")

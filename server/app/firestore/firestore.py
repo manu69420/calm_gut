@@ -47,12 +47,18 @@ class Firestore():
         return [doc.to_dict() for doc in docs]
     
     def get_summary(self) -> str:
-        chat = self.chat.get()
-        return chat.to_dict().get("summary")
+        try:
+            chat = self.chat.get()
+            return chat.to_dict().get("summary")
+        except:
+            return "No summary"
     
     def messages_count(self):
-        chat = self.chat.get()
-        return int(chat.to_dict().get("message_count"))
+        try:
+            chat = self.chat.get()
+            return int(chat.to_dict().get("message_count"))
+        except:
+            return 0
     
     def update_messages_count(self, messages_count:int):
         self.chat.update({"message_count": messages_count})
