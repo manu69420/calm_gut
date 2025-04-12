@@ -13,5 +13,16 @@ final class ChatRoutes {
 
 final class ProfileRoutes {
   String get profile => '/profile';
-  String get createRecord => '/profile/create-medical-record';
+  GoPath get createRecord => GoPath(
+    fullPath: '/profile/create-medical-record',
+    partialPath: '/create-medical-record',
+  );
+  GoPath get settings =>
+      GoPath(fullPath: '/profile/settings', partialPath: '/settings');
+}
+
+class GoPath {
+  const GoPath({required this.fullPath, required this.partialPath});
+  final String fullPath;
+  final String partialPath;
 }

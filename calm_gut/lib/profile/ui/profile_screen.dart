@@ -1,8 +1,10 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:calm_gut/app/utils/router/routes.dart';
 import 'package:calm_gut/profile/medical_records/ui/medical_records_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -14,10 +16,10 @@ class ProfileScreen extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.profile),
         actions: [
           IconButton(
-            onPressed:
-                () async =>
-                    await context.read<AuthenticationRepository>().logOut(),
-            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              context.go(Routes.profileRoutes.settings.fullPath);
+            },
+            icon: Icon(Icons.settings),
           ),
         ],
       ),

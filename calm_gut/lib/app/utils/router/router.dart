@@ -7,6 +7,7 @@ import 'package:calm_gut/auth/sign_up/view/sign_up_page.dart';
 import 'package:calm_gut/chat/view/chat_screen.dart';
 import 'package:calm_gut/diary/ui/diary_screen.dart';
 import 'package:calm_gut/profile/ui/profile_screen.dart';
+import 'package:calm_gut/settings/ui/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -55,6 +56,12 @@ GoRouter router(AppBloc bloc) {
               GoRoute(
                 builder: (context, state) => const ProfileScreen(),
                 path: Routes.profileRoutes.profile,
+                routes: <RouteBase>[
+                  GoRoute(
+                    builder: (context, state) => const SettingsScreen(),
+                    path: Routes.profileRoutes.settings.partialPath,
+                  ),
+                ],
               ),
             ],
           ),

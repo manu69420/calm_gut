@@ -1,5 +1,6 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:calm_gut/app/bloc/app_bloc.dart';
+import 'package:calm_gut/app/localization/cubit/localization_cubit.dart';
 import 'package:calm_gut/app/utils/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,12 +18,16 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
       value: _authenticationRepository,
-      child: BlocProvider(
-        lazy: false,
-        create:
-            (_) =>
-                AppBloc(authenticationRepository: _authenticationRepository)
-                  ..add(const AppUserSubscriptionRequested()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create:
+                (_) =>
+                    AppBloc(authenticationRepository: _authenticationRepository)
+                      ..add(const AppUserSubscriptionRequested()),
+          ),
+          BlocProvider(create: (context) => LocalizationCubit()),
+        ],
         child: const AppView(),
       ),
     );
@@ -37,6 +42,7 @@ class AppView extends StatelessWidget {
     return MaterialApp.router(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      locale: context.select((LocalizationCubit cubit) => cubit.state.locale),
       debugShowCheckedModeBanner: false,
       title: 'Innowatt',
       darkTheme: ThemeData(

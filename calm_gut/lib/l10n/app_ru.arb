@@ -27,5 +27,10 @@
   "createMedicalRecord": "Создайте медицинскую карту",
   "title": "Название",
   "description": "Описание",
-  "create": "Создать"
+  "create": "Создать",
+
+  "settings": "Настройки",
+  "chooseLanguage": "Выберите язык",
+  "logOut": "Выйти",
+  "save": "Сохранить"
 }

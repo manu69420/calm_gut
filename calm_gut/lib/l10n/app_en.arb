@@ -106,5 +106,22 @@
   "create": "Create",
   "@create": {
     "description": "Create"
+  },
+
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings"
+  },
+  "chooseLanguage": "Choose Language",
+  "@chooseLanguage": {
+    "description": "Choose Language"
+  },
+  "logOut": "Log Out",
+  "@logOut": {
+    "description": "Log Out"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save"
   }
 }

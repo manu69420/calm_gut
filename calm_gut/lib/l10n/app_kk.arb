@@ -27,5 +27,10 @@
   "createMedicalRecord": "Медициналық картаны жасаңыз",
   "title": "Атауы",
   "description": "Сипаттама",
-  "create": "Жасау"
+  "create": "Жасау",
+
+  "settings": "Параметрлер",
+  "chooseLanguage": "Тілді таңдаңыз",
+  "logOut": "Шығу",
+  "save": "Сақтау"
 }
