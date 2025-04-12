@@ -65,8 +65,9 @@ class Message {
 
   int differenceInHours(Message other) {
     try {
-      final difference =
-          (createdAt.toDate()).difference(other.createdAt.toDate());
+      final difference = (createdAt.toDate()).difference(
+        other.createdAt.toDate(),
+      );
       return difference.inHours.abs();
     } catch (_) {
       return 0;

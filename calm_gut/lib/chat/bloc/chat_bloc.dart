@@ -70,7 +70,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     _chatRepository.updateCreatedTime(chatId: _messageRepository.chatId);
     try {
       emit(state.copyWith(waitingResponse: true));
-      // await _messageRepository.getResponse();
+      await _messageRepository.getResponse();
       emit(state.copyWith(waitingResponse: false));
     } catch (_) {
       emit(state.copyWith(errorGettingResponse: true));

@@ -5,6 +5,8 @@ import 'package:calm_gut/app/utils/router/routes.dart';
 import 'package:calm_gut/auth/login/view/login_page.dart';
 import 'package:calm_gut/auth/sign_up/view/sign_up_page.dart';
 import 'package:calm_gut/chat/view/chat_screen.dart';
+import 'package:calm_gut/diary/ui/diary_screen.dart';
+import 'package:calm_gut/profile/ui/profile_screen.dart';
 import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -43,16 +45,16 @@ GoRouter router(AppBloc bloc) {
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                builder: (context, state) => Text("In development"),
-                path: Routes.home,
+                builder: (context, state) => const DiaryScreen(),
+                path: Routes.diary,
               ),
             ],
           ),
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                builder: (context, state) => Text("In development"),
-                path: Routes.home,
+                builder: (context, state) => const ProfileScreen(),
+                path: Routes.profileRoutes.profile,
               ),
             ],
           ),
@@ -68,7 +70,7 @@ GoRouter router(AppBloc bloc) {
         return !onSignUpPage ? Routes.login : null;
       }
       if (onLoginPage) {
-        return Routes.home;
+        return Routes.diary;
       }
       return null;
     },

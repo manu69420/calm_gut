@@ -60,11 +60,6 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> signUpFormSubmitted() async {
     if (!state.isValid) return;
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    print("####################");
-    print(state.email);
-    print(state.password);
-    print(state.confirmedPassword);
-    print("####################");
     try {
       await _authenticationRepository.signUp(
         email: state.email.value,

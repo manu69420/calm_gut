@@ -12,6 +12,7 @@ def get_response(chat_id: str):
     firestore = Firestore(chat_id=chat_id)
     
     last_messages = firestore.last_n_messages(20)
+    last_messages = [('Bot: ' if message['author_id'] == 'bot_id' else 'User: ' ) + "\'" + message['text'] + "\'" for message in last_messages]
     summary = firestore.get_summary()
     messages_count = firestore.messages_count()
 
@@ -32,5 +33,3 @@ def delete_history(chat_id: str):
     firestore = Firestore(chat_id=chat_id)
     firestore.delete_collection(firestore.messages, firestore.messages_count())
     firestore.update_messages_count(0)
-
-get_response("1UxWfxy1vRQGepCb53GFTOljTHf2")
