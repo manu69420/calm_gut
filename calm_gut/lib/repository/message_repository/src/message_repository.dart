@@ -31,7 +31,7 @@ class MessageRepository {
 
   bool get hasMoreChats => _hasMoreChats;
 
-  void sendMessage({
+  Future<void> sendMessage({
     required String text,
     required String authorId,
     required String chatId,

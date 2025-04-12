@@ -16,12 +16,12 @@ class DiaryCubit extends Cubit<DiaryState> {
   }
 
   Future<void> diaryFetched() async {
-    emit(DiaryLoading());
     try {
+      emit(DiaryLoading());
       final diary = await _diaryRepository.getDiary();
       emit(DiaryLoaded(content: diary.content, changed: false));
     } catch (_) {
-      emit(DiaryError());
+      if (!isClosed) emit(DiaryError());
     }
   }
 

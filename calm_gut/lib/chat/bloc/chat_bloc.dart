@@ -61,7 +61,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   Future<void> _onSent(MessageSent event, Emitter<ChatState> emit) async {
-    _messageRepository.sendMessage(
+    await _messageRepository.sendMessage(
       text: event.text,
       authorId: event.authorId,
       chatId: _messageRepository.chatId,

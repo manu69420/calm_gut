@@ -15,6 +15,7 @@ def get_response(chat_id: str):
     last_messages = [('Bot: ' if message['author_id'] == 'bot_id' else 'User: ' ) + "\'" + message['text'] + "\'" for message in last_messages]
     summary = firestore.get_summary()
     messages_count = firestore.messages_count()
+    print(last_messages)
 
     if messages_count % 20 == 0:
         new_summary = ChatEngine().summarize(new_messages=last_messages, prev_summary=summary)
