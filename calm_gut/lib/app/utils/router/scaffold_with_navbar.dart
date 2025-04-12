@@ -10,21 +10,21 @@ class _ScaffoldWithNavbar extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.messenger_outline),
             activeIcon: Icon(Icons.messenger),
-            label: 'Chat',
+            label: AppLocalizations.of(context)!.chat,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.note_alt_outlined),
             activeIcon: Icon(Icons.note_alt),
-            label: 'Diary',
+            label: AppLocalizations.of(context)!.diary,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             activeIcon: Icon(Icons.person),
-            label: 'Profile',
+            label: AppLocalizations.of(context)!.profile,
           ),
         ],
         currentIndex: navigationShell.currentIndex,

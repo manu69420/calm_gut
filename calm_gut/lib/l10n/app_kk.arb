@@ -1,0 +1,31 @@
+{
+  "welcomeMessage": "Calm Gut-қа қош келдіңіз!",
+  "login": "Кіру",
+  "authenticationFailure": "Аутентификация сәтсіз аяқталды",
+  "createAccount": "Жаңа Аккаунт Жасау",
+  "signUp": "Тіркелу",
+  "signUpFailure": "Тіркеу қатесі",
+  "email": "Электрондық пошта",
+  "invalidEmail": "Электрондық пошта дұрыс емес",
+  "password": "Құпия сөз",
+  "shortPassword": "Құпия сөз тым қысқа",
+  "passwordNoLetters": "Құпия сөзде әріптер болуы керек",
+  "confirmPassword": "Құпия сөзді растаңыз",
+  "textFieldEmpty": "Мәтін жолағы бос болмауы керек",
+
+  "diary": "Күнделік",
+  "medicalDiary": "Медициналық күнделік",
+  "diaryHint": "Күнделікке бір нәрсе жазыңыз...",  
+
+  "chat": "Чат",
+  "chatbot": "Чатбот",
+  "emptyChatMessage": "Сіздің чатыңыз бос\nХат жіберіңіз",
+  "sendMessage": "Хабарлама жіберіңіз",
+
+  "profile": "Профиль",
+  "medicalInformation": "Медициналық ақпарат",
+  "createMedicalRecord": "Медициналық картаны жасаңыз",
+  "title": "Атауы",
+  "description": "Сипаттама",
+  "create": "Жасау"
+}

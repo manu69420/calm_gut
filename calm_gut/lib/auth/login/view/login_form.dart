@@ -3,8 +3,10 @@ import 'package:calm_gut/auth/login/cubit/login_cubit.dart';
 import 'package:calm_gut/core/widgets/elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -19,7 +21,10 @@ class LoginForm extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                content: Text(state.errorMessage ?? 'Authentication failure'),
+                content: Text(
+                  state.errorMessage ??
+                      AppLocalizations.of(context)!.authenticationFailure,
+                ),
               ),
             );
         }
@@ -34,7 +39,7 @@ class LoginForm extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      "Welcome to Calm Gut!",
+                      AppLocalizations.of(context)!.welcomeMessage,
                       overflow: TextOverflow.clip,
                       softWrap: true,
                       style: TextStyle(
@@ -66,18 +71,23 @@ class LoginForm extends StatelessWidget {
 class _EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final displayError = context.select(
-      (LoginCubit cubit) => cubit.state.email.displayError,
-    );
+    final email = context.select((LoginCubit cubit) => cubit.state.email);
+    late final String? errorText;
+    switch (email.error) {
+      case EmailValidationError.invalid:
+        errorText = AppLocalizations.of(context)!.invalidEmail;
+      default:
+        errorText = null;
+    }
     return TextField(
       key: const Key('loginForm_emailInput_textField'),
       onChanged: (email) => context.read<LoginCubit>().emailChanged(email),
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'email',
+        labelText: AppLocalizations.of(context)!.email.toLowerCase(),
         helperText: '',
-        errorText: displayError?.text(),
+        errorText: errorText,
       ),
     );
   }
@@ -86,9 +96,16 @@ class _EmailInput extends StatelessWidget {
 class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final displayError = context.select(
-      (LoginCubit cubit) => cubit.state.password.displayError,
-    );
+    final password = context.select((LoginCubit cubit) => cubit.state.password);
+    late final String? errorText;
+    switch (password.error) {
+      case PasswordValidatorError.invalid:
+        errorText = AppLocalizations.of(context)!.passwordNoLetters;
+      case PasswordValidatorError.short:
+        errorText = AppLocalizations.of(context)!.shortPassword;
+      default:
+        errorText = null;
+    }
     return TextField(
       key: const Key('loginForm_passwordInput_textField'),
       onChanged:
@@ -96,9 +113,9 @@ class _PasswordInput extends StatelessWidget {
       obscureText: true,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'password',
+        labelText: AppLocalizations.of(context)!.password.toLowerCase(),
         helperText: '',
-        errorText: displayError?.text(),
+        errorText: errorText,
         errorStyle: TextStyle(overflow: TextOverflow.fade),
       ),
     );
@@ -126,7 +143,7 @@ class _LoginButton extends StatelessWidget {
         child: Center(
           child:
               !isInProgress
-                  ? const Text('LOGIN')
+                  ? Text(AppLocalizations.of(context)!.login.toUpperCase())
                   : SizedBox(
                     height: 18,
                     width: 18,
@@ -161,7 +178,7 @@ class _SignUpButton extends StatelessWidget {
       key: const Key('loginForm_createAccount_flatButton'),
       onPressed: () => GoRouter.of(context).push(Routes.signUp),
       child: Text(
-        'CREATE ACCOUNT',
+        AppLocalizations.of(context)!.createAccount.toUpperCase(),
         style: TextStyle(color: colorScheme.secondary),
       ),
     );

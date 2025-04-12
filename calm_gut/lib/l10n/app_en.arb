@@ -1,0 +1,110 @@
+{
+  "welcomeMessage": "Welcome to Calm Gut!",
+  "@welcomeMessage": {
+    "description": "Greeting message"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login"
+  },
+  "authenticationFailure": "Authentication Failure",
+  "@authenticationFailure": {
+    "description": "Authentication Failure"
+  },
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Create Account"
+  },
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Sign Up"
+  },
+  "signUpFailure": "Sign Up Failure",
+  "@signUpFailure": {
+    "description": "Sign Up Failure"
+  },
+  "email": "Email",
+  "@email" : {
+    "description": "Email"
+  },
+  "invalidEmail": "Email is invalid",
+  "@invalidEmail" : {
+    "description": "Email is invalid"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password"
+  },
+  "shortPassword": "Password is too short",
+  "@shortPassword": {
+    "description": "Password is too short"
+  },
+  "passwordNoLetters": "Password should contain letters",
+  "@passwordNoLetters": {
+    "description": "Password should contain letters"
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Confirm Password"
+  },
+  "textFieldEmpty": "Text Field cannot be empty",
+  "@textFieldEmpty": {
+    "description": "Text Field cannot be empty"
+  },
+
+  "diary": "Diary",
+  "@diary": {
+    "description": "Diary"
+  },
+  "medicalDiary": "Medical Diary",
+  "@medicalDiary": {
+    "description": "Medical Diary"
+  },
+  "diaryHint": "Write something in your diary...",
+  "@diaryHint": {
+    "description": "Diary hint text"
+  },
+
+  "chat": "Chat",
+  "@chat": {
+    "description": "Chat"
+  },
+  "chatbot": "Chatbot",
+  "@chatbot": {
+    "description": "Chatbot"
+  },
+  "emptyChatMessage": "Your chat is empty\nSend a message",
+  "@chatbot": {
+    "description": "Chatbot"
+  },
+  "sendMessage": "Send Message",
+  "@sendMessage": {
+    "description": "Send message text"
+  },
+
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile"
+  },
+  "medicalInformation": "Medical Information",
+  "@medicalInformation": {
+    "description": "Medical Information"
+  },
+  "createMedicalRecord": "Create a Medical record",
+  "@createMedicalRecord": {
+    "description": "Create a Medical record"
+  },
+
+  "title": "Title",
+  "@title": {
+    "description": "Title"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Description"
+  },
+  "create": "Create",
+  "@create": {
+    "description": "Create"
+  }
+}

@@ -28,7 +28,10 @@ Updated Summary:
     
     def generate_response(self, query, last_messages=None, summary=None, replied_to=None):
         prompt = f'''
-"Generate a response to the following message, using the provided context:
+"
+You are medical information assistant. You are to provide information about medicine and gut health. You will be helping with analysing symptoms and helping patients. 
+
+Generate a response to the following message, using the provided context:
 
 Message Text: {query}
 Last Messages: {last_messages}

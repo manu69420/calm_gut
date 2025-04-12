@@ -8,8 +8,8 @@ import 'package:calm_gut/chat/view/chat_screen.dart';
 import 'package:calm_gut/diary/ui/diary_screen.dart';
 import 'package:calm_gut/profile/ui/profile_screen.dart';
 import 'package:flutter/material.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 part 'scaffold_with_navbar.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(

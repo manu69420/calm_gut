@@ -5,6 +5,7 @@ import 'package:calm_gut/diary/cubit/diary_cubit.dart';
 import 'package:calm_gut/repository/diary_repository/diary_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DiaryScreen extends StatelessWidget {
   const DiaryScreen({super.key});
@@ -70,7 +71,7 @@ class _DiaryState extends State<_Diary> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Medical Diary"),
+        title: Text(AppLocalizations.of(context)!.medicalDiary),
         actions: [
           IconButton(
             onPressed:
@@ -105,7 +106,7 @@ class _DiaryState extends State<_Diary> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(5),
                     border: InputBorder.none,
-                    hintText: "Write something in your diary...",
+                    hintText: AppLocalizations.of(context)!.diaryHint,
                   ),
                 ),
               ),

@@ -3,6 +3,7 @@ import 'package:calm_gut/profile/medical_records/cubit/create_record_cubit.dart'
 import 'package:calm_gut/repository/medical_repository/medical_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateMedicalRecord<T> extends PopupRoute {
   @override
@@ -57,7 +58,7 @@ class _Content extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Create a Medical Record',
+          AppLocalizations.of(context)!.createMedicalRecord,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         _TitleInput(),
@@ -67,7 +68,7 @@ class _Content extends StatelessWidget {
             context.read<CreateRecordCubit>().createRecord();
             Navigator.of(context).pop();
           },
-          child: Center(child: const Text("Create")),
+          child: Center(child: Text(AppLocalizations.of(context)!.create)),
         ),
       ],
     );
@@ -85,7 +86,7 @@ class _DescriptionInput extends StatelessWidget {
           (value) =>
               context.read<CreateRecordCubit>().descriptionChanged(value),
       decoration: InputDecoration(
-        hintText: 'Description',
+        hintText: AppLocalizations.of(context)!.description.toLowerCase(),
         errorText: displayError,
       ),
     );
@@ -101,7 +102,10 @@ class _TitleInput extends StatelessWidget {
     return TextField(
       onChanged:
           (value) => context.read<CreateRecordCubit>().titleChanged(value),
-      decoration: InputDecoration(hintText: 'Title', errorText: displayError),
+      decoration: InputDecoration(
+        hintText: AppLocalizations.of(context)!.title.toLowerCase(),
+        errorText: displayError,
+      ),
     );
   }
 }

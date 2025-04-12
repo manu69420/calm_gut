@@ -13,8 +13,8 @@ class RecordsBloc extends Bloc<RecordsEvent, RecordsState> {
     on<RecordsFetched>(_onFetch);
   }
   final MedicalRepository _medicalRepository;
-  final Text title = Text.pure();
-  final Text description = Text.pure();
+  final GenericText title = GenericText.pure();
+  final GenericText description = GenericText.pure();
 
   Future<void> _onFetch(
     RecordsFetched event,

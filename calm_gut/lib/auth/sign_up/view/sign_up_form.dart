@@ -2,8 +2,10 @@ import 'package:calm_gut/auth/sign_up/cubit/sign_up_cubit.dart';
 import 'package:calm_gut/core/widgets/elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({super.key});
@@ -18,7 +20,12 @@ class SignUpForm extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text(state.errorMessage ?? 'Sign Up Failure')),
+              SnackBar(
+                content: Text(
+                  state.errorMessage ??
+                      AppLocalizations.of(context)!.signUpFailure,
+                ),
+              ),
             );
         }
       },
@@ -42,9 +49,14 @@ class SignUpForm extends StatelessWidget {
 class _EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final displayError = context.select(
-      (SignUpCubit cubit) => cubit.state.email.displayError,
-    );
+    final email = context.select((SignUpCubit cubit) => cubit.state.email);
+    late final String? errorText;
+    switch (email.error) {
+      case EmailValidationError.invalid:
+        errorText = AppLocalizations.of(context)!.invalidEmail;
+      default:
+        errorText = null;
+    }
 
     return TextField(
       key: const Key('signUpForm_emailInput_textField'),
@@ -52,9 +64,9 @@ class _EmailInput extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'email',
+        labelText: AppLocalizations.of(context)!.email.toLowerCase(),
         helperText: '',
-        errorText: displayError?.text(),
+        errorText: errorText,
       ),
     );
   }
@@ -63,9 +75,18 @@ class _EmailInput extends StatelessWidget {
 class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final displayError = context.select(
-      (SignUpCubit cubit) => cubit.state.password.displayError,
+    final password = context.select(
+      (SignUpCubit cubit) => cubit.state.password,
     );
+    late final String? errorText;
+    switch (password.error) {
+      case PasswordValidatorError.invalid:
+        errorText = AppLocalizations.of(context)!.passwordNoLetters;
+      case PasswordValidatorError.short:
+        errorText = AppLocalizations.of(context)!.shortPassword;
+      default:
+        errorText = null;
+    }
     return TextField(
       key: const Key('signUpForm_passwordInput_textField'),
       onChanged:
@@ -73,9 +94,9 @@ class _PasswordInput extends StatelessWidget {
       obscureText: true,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'password',
+        labelText: AppLocalizations.of(context)!.password.toLowerCase(),
         helperText: '',
-        errorText: displayError?.text(),
+        errorText: errorText,
       ),
     );
   }
@@ -84,9 +105,16 @@ class _PasswordInput extends StatelessWidget {
 class _ConfirmPasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final displayError = context.select(
-      (SignUpCubit cubit) => cubit.state.confirmedPassword.displayError,
+    final confirmedPassword = context.select(
+      (SignUpCubit cubit) => cubit.state.confirmedPassword,
     );
+    late final String? errorText;
+    switch (confirmedPassword.error) {
+      case ConfirmedPasswordValidationError.invalid:
+        errorText = AppLocalizations.of(context)!.passwordNoLetters;
+      default:
+        errorText = null;
+    }
     return TextField(
       key: const Key('signUpForm_confirmedPasswordInput_textField'),
       onChanged:
@@ -96,9 +124,9 @@ class _ConfirmPasswordInput extends StatelessWidget {
       obscureText: true,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'confirm password',
+        labelText: AppLocalizations.of(context)!.confirmPassword.toLowerCase(),
         helperText: '',
-        errorText: displayError?.text(),
+        errorText: errorText,
       ),
     );
   }
@@ -126,7 +154,7 @@ class _SignUpButton extends StatelessWidget {
           padding: const EdgeInsets.all(12.0),
           child:
               !isInProgress
-                  ? const Text('SIGN UP')
+                  ? Text(AppLocalizations.of(context)!.signUp.toUpperCase())
                   : const CircularProgressIndicator(),
         ),
       ),

@@ -1,0 +1,31 @@
+{
+  "welcomeMessage": "Добро пожаловать в Calm Gut!",
+  "login": "Авторизоваться",
+  "authenticationFailure": "Сбой аутентификации",
+  "createAccount": "Создать Аккаунт",
+  "signUp": "Зарегистрироваться",
+  "signUpFailure": "Ошибка регистрации",
+  "email": "Электронная почта",
+  "invalidEmail": "Адрес электронной почты неверен",
+  "password": "Пароль",
+  "shortPassword": "Пароль слишком короткий",
+  "passwordNoLetters": "Пароль должен содержать буквы",
+  "confirmPassword": "Подтвердите пароль",
+  "textFieldEmpty": "Текстовое поле не может быть пустым",
+
+  "diary": "Дневник",
+  "medicalDiary": "Медицинский дневник",
+  "diaryHint": "Запишите что-нибудь в свой дневник...",
+
+  "chat": "Чат",
+  "chatbot": "Чат-бот",
+  "emptyChatMessage": "Ваш чат пуст\nОтправьте сообщение",
+  "sendMessage": "Отправьте сообщение",
+
+  "profile": "Профиль",
+  "medicalInformation": "Медицинская информация",
+  "createMedicalRecord": "Создайте медицинскую карту",
+  "title": "Название",
+  "description": "Описание",
+  "create": "Создать"
+}

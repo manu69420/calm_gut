@@ -4,6 +4,7 @@ import 'package:calm_gut/profile/medical_records/ui/create_medical_record.dart';
 import 'package:calm_gut/repository/medical_repository/medical_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MedicalRecordsScreen extends StatelessWidget {
   const MedicalRecordsScreen({super.key});
@@ -31,7 +32,7 @@ class MedicalRecordsView extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: Text("Medical Information"),
+          title: Text(AppLocalizations.of(context)!.medicalInformation),
           leading: Icon(
             Icons.edit_note,
             color: colorScheme.onSurface.withAlpha(150),

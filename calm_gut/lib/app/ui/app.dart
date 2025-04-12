@@ -3,6 +3,7 @@ import 'package:calm_gut/app/bloc/app_bloc.dart';
 import 'package:calm_gut/app/utils/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -34,6 +35,8 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       title: 'Innowatt',
       darkTheme: ThemeData(

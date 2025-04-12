@@ -9,6 +9,7 @@ import 'package:calm_gut/repository/chat_repository/src/chat_repository.dart';
 import 'package:calm_gut/repository/message_repository/src/message_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -23,7 +24,10 @@ class ChatScreen extends StatelessWidget {
             messageRepository: MessageRepository(chatId: chatId),
             chatRepository: ChatRepository(),
           )..add(MessagesFetched()),
-      child: SingleUserChatView(chatId: chatId, chatName: "Chatbot"),
+      child: SingleUserChatView(
+        chatId: chatId,
+        chatName: AppLocalizations.of(context)!.chatbot,
+      ),
     );
   }
 }
@@ -120,8 +124,9 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
             SizedBox(width: 20),
             Expanded(
               child: TextField(
+                textCapitalization: TextCapitalization.sentences,
                 decoration: InputDecoration(
-                  hintText: 'Send Message',
+                  hintText: AppLocalizations.of(context)!.sendMessage,
                   contentPadding: EdgeInsets.only(left: 10),
                 ),
                 controller: _messageController,
@@ -215,9 +220,9 @@ class _EmptyMessagesView extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment(0, 0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [Text('Your chat is empty'), Text('Send a message')],
+          child: Text(
+            AppLocalizations.of(context)!.emptyChatMessage,
+            textAlign: TextAlign.center,
           ),
         ),
       ],

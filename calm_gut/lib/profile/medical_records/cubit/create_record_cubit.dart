@@ -14,12 +14,12 @@ class CreateRecordCubit extends Cubit<CreateRecordState> {
   final MedicalRepository _medicalRepository;
 
   void titleChanged(String value) {
-    final title = Text.dirty(value);
+    final title = GenericText.dirty(value);
     emit(state.copyWith(title: title, isValid: Formz.validate([state.title])));
   }
 
   void descriptionChanged(String value) {
-    final description = Text.dirty(value);
+    final description = GenericText.dirty(value);
     emit(
       state.copyWith(
         description: description,

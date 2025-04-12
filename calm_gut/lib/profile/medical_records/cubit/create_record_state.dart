@@ -2,21 +2,21 @@ part of 'create_record_cubit.dart';
 
 final class CreateRecordState extends Equatable {
   const CreateRecordState({
-    this.title = const Text.pure(),
-    this.description = const Text.pure(),
+    this.title = const GenericText.pure(),
+    this.description = const GenericText.pure(),
     this.status = FormzSubmissionStatus.initial,
     this.isValid = false,
     this.errorMessage,
   });
-  final Text title;
-  final Text description;
+  final GenericText title;
+  final GenericText description;
   final FormzSubmissionStatus status;
   final bool isValid;
   final String? errorMessage;
 
   CreateRecordState copyWith({
-    Text? title,
-    Text? description,
+    GenericText? title,
+    GenericText? description,
     FormzSubmissionStatus? status,
     bool? isValid,
     String? errorMessage,
