@@ -51,7 +51,7 @@ class _EmailInput extends StatelessWidget {
   Widget build(BuildContext context) {
     final email = context.select((SignUpCubit cubit) => cubit.state.email);
     late final String? errorText;
-    switch (email.error) {
+    switch (email.displayError) {
       case EmailValidationError.invalid:
         errorText = AppLocalizations.of(context)!.invalidEmail;
       default:
@@ -79,7 +79,7 @@ class _PasswordInput extends StatelessWidget {
       (SignUpCubit cubit) => cubit.state.password,
     );
     late final String? errorText;
-    switch (password.error) {
+    switch (password.displayError) {
       case PasswordValidatorError.invalid:
         errorText = AppLocalizations.of(context)!.passwordNoLetters;
       case PasswordValidatorError.short:
@@ -109,9 +109,10 @@ class _ConfirmPasswordInput extends StatelessWidget {
       (SignUpCubit cubit) => cubit.state.confirmedPassword,
     );
     late final String? errorText;
-    switch (confirmedPassword.error) {
+    switch (confirmedPassword.displayError) {
       case ConfirmedPasswordValidationError.invalid:
         errorText = AppLocalizations.of(context)!.passwordNoLetters;
+        break;
       default:
         errorText = null;
     }

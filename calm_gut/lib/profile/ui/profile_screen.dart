@@ -47,7 +47,7 @@ class _Email extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return ListTile(
       title: Text(user.email ?? 'Unknown email'),
-      leading: Icon(Icons.email, color: colorScheme.onSurface.withAlpha(150)),
+      leading: Icon(Icons.email, color: colorScheme.secondary),
     );
   }
 }
@@ -55,9 +55,13 @@ class _Email extends StatelessWidget {
 class _ProfileIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Align(
+    return Align(
       alignment: Alignment(0, 0),
-      child: Icon(Icons.person, size: 80),
+      child: Icon(
+        Icons.person,
+        size: 80,
+        color: Theme.of(context).colorScheme.primary,
+      ),
     );
   }
 }

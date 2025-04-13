@@ -72,10 +72,10 @@ class _WidgetWithShaders extends StatelessWidget {
         final colorScheme = Theme.of(context).colorScheme;
         return LinearGradient(
           colors: [
-            colorScheme.primaryFixedDim.brighten(0.8),
+            colorScheme.tertiary.brighten(0.8),
             Colors.white,
             Colors.white,
-            colorScheme.primaryFixedDim.brighten(0.9),
+            colorScheme.tertiary.brighten(0.9),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

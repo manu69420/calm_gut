@@ -73,11 +73,11 @@ class _Bubble extends StatelessWidget {
             upperRightRadius: onRight && prevDifferent ? 20 : null,
             upperLeftRadius: !onRight && prevDifferent ? 20 : null,
           ),
-          elevation: 2,
+          elevation: 1,
           color:
               onRight
                   ? Theme.of(context).colorScheme.primaryContainer
-                  : Theme.of(context).colorScheme.secondaryContainer,
+                  : Theme.of(context).colorScheme.tertiaryContainer,
           child: Padding(
             padding:
                 onRight
@@ -108,7 +108,7 @@ class _Bubble extends StatelessWidget {
                     child: Text(
                       message.createdAt.time(),
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: Theme.of(context).colorScheme.tertiary,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                   ),

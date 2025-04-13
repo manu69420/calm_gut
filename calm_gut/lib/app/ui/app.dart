@@ -2,6 +2,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:calm_gut/app/bloc/app_bloc.dart';
 import 'package:calm_gut/app/localization/cubit/localization_cubit.dart';
 import 'package:calm_gut/app/utils/router/router.dart';
+import 'package:calm_gut/app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -39,20 +40,24 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme();
     return MaterialApp.router(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: context.select((LocalizationCubit cubit) => cubit.state.locale),
       debugShowCheckedModeBanner: false,
       title: 'Innowatt',
-      darkTheme: ThemeData(
-        fontFamily: 'Montserrat',
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
-      ),
-      theme: ThemeData(
-        fontFamily: 'Montserrat',
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
-      ),
+      theme: MaterialTheme(TextTheme().apply(fontFamily: 'Montserrat')).light(),
+      darkTheme:
+          MaterialTheme(TextTheme().apply(fontFamily: 'Montserrat')).dark(),
+      // darkTheme: ThemeData(
+      //   fontFamily: 'Montserrat',
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
+      // ),
+      // theme: ThemeData(
+      //   fontFamily: 'Montserrat',
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
+      // ),
       routerConfig: router(context.watch<AppBloc>()),
     );
   }

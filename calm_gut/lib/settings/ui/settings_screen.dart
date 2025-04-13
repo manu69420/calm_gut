@@ -62,19 +62,20 @@ class _LogOutAndSaveButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.all(0),
-      title: Text(
-        AppLocalizations.of(context)!.logOut,
-        style: TextStyle(color: Theme.of(context).colorScheme.error),
-      ),
-      leading: IconButton(
+      leading: TextButton.icon(
+        label: Text(
+          AppLocalizations.of(context)!.logOut,
+          style: TextStyle(color: Theme.of(context).colorScheme.error),
+        ),
+        icon: Icon(Icons.logout, color: Theme.of(context).colorScheme.error),
         onPressed:
             () async => await context.read<AuthenticationRepository>().logOut(),
-        icon: Icon(Icons.logout, color: Theme.of(context).colorScheme.error),
       ),
       trailing: ElevatedButton.icon(
         onPressed: () {
           context.read<LocalizationCubit>().onToggleLocale(locale);
         },
+        style: ElevatedButton.styleFrom(),
         label: Text(AppLocalizations.of(context)!.save),
         icon: Icon(Icons.save),
       ),

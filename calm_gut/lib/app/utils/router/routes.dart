@@ -2,6 +2,7 @@ abstract final class Routes {
   static const login = '/login';
   static const signUp = '/sign-up';
   static const diary = '/';
+  static const moodPopup = '/mood-popup';
   static final ChatRoutes chatRoutes = ChatRoutes();
   static final ProfileRoutes profileRoutes = ProfileRoutes();
 }

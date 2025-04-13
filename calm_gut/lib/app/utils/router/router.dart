@@ -6,9 +6,12 @@ import 'package:calm_gut/auth/login/view/login_page.dart';
 import 'package:calm_gut/auth/sign_up/view/sign_up_page.dart';
 import 'package:calm_gut/chat/view/chat_screen.dart';
 import 'package:calm_gut/diary/ui/diary_screen.dart';
+import 'package:calm_gut/mood/popup/cubit/mood_test_cubit.dart';
+import 'package:calm_gut/mood/popup/ui/mood_popup.dart';
 import 'package:calm_gut/profile/ui/profile_screen.dart';
 import 'package:calm_gut/settings/ui/settings_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 part 'scaffold_with_navbar.dart';
@@ -30,6 +33,15 @@ GoRouter router(AppBloc bloc) {
         builder: (context, state) => const SignUpPage(),
         path: Routes.signUp,
       ),
+      GoRoute(
+        builder:
+            (context, state) => BlocProvider.value(
+              value: state.extra! as MoodTestCubit,
+              child: MoodPopup(),
+            ),
+        path: Routes.moodPopup,
+      ),
+      // GoRoute(builder: (context, state) => MoodPopup(), path: Routes.moodPopup),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return _ScaffoldWithNavbar(navigationShell: navigationShell);

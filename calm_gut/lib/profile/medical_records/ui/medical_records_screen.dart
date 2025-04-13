@@ -33,15 +33,12 @@ class MedicalRecordsView extends StatelessWidget {
       children: [
         ListTile(
           title: Text(AppLocalizations.of(context)!.medicalInformation),
-          leading: Icon(
-            Icons.edit_note,
-            color: colorScheme.onSurface.withAlpha(150),
-          ),
+          leading: Icon(Icons.edit_note, color: colorScheme.secondary),
           trailing: IconButton(
             onPressed: () {
               Navigator.of(context).push(CreateMedicalRecord<void>());
             },
-            icon: Icon(Icons.add),
+            icon: Icon(Icons.add, color: colorScheme.primary),
           ),
         ),
         _RecordsList(),
@@ -60,8 +57,8 @@ class _RecordsList extends StatelessWidget {
       itemCount: records.length,
       itemBuilder: (context, index) {
         return ListTile(
-          leading: Text(records[index].title),
-          title: Text(records[index].description),
+          subtitle: Text(records[index].description),
+          title: Text(records[index].title),
         );
       },
     );

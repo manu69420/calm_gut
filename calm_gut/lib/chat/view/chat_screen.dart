@@ -64,7 +64,10 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.chatName),
+        title: Text(
+          widget.chatName,
+          style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -92,7 +95,10 @@ class _SingleUserChatViewState extends State<SingleUserChatView> {
                 },
               );
             },
-            icon: Icon(Icons.delete),
+            icon: Icon(
+              Icons.delete,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
         ],
       ),
