@@ -7,7 +7,7 @@ The backend is written on FastAPI. render.com has been used as a hosting service
 Firebase has been used as a Database. 
 The UI and some of the basic functionality is written of Flutter. 
 ### Flutter Libraries
-I have used many libraries for different purposes. I have used BLoC for state management; GoRouter for nagivation management; html for writing data layer of the project; 
+I have used many libraries for different purposes. I have used BLoC for state management; GoRouter for nagivation management; html for writing data layer of the project; Json Serialization for managing json data. 
 
 ## Display of an App
 ![Chat Demonstration](doc_videos/chat.gif)| ![Diary Test](doc_videos/diary_test.gif)
