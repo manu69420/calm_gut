@@ -128,5 +128,136 @@
   "articles": "Articles", 
   "@articles": {
     "description": "Articles"
+  },
+
+  "dailyTest": "Daily Test",
+  "@dailyTest": {
+    "description": "Daily Test"
+  },
+
+  "rateMoodQuestion": "How would you rate your mood today?",
+  "@rateMoodQuestion": {
+    "description": "Rating the mood question"
+  },
+  "sentimentVeryGoodText": "😊 Very Good (5)",
+  "@sentimentVeryGoodText": {
+    "description": "Rating text sentiment"
+  },
+  "sentimentGoodText": "🙂 Good (4)",
+  "@sentimentGoodText": {
+    "description": "Rating text sentiment"
+  },
+  "sentimentNeutralText": "😐 Neutral (3)",
+  "@sentimentNeutralText": {
+    "description": "Rating text sentiment"
+  },
+  "sentimentBadText": "😕 Bad (2)",
+  "@sentimentBadText": {
+    "description": "Rating text sentiment"
+  },
+  "sentimentVeryBadText": "😞 Very Bad (1)",
+  "@sentimentVeryBadText": {
+    "description": "Rating text sentiment"
+  },
+
+  "rateStressQuestion": "How stressed did you feel today?",
+  "@rateStressQuestion": {
+    "description": "Rating the stress question"
+  },
+  "noStressText": "😌 Not stressed at all (1)",
+  "@noStressText": {
+    "description": "Stress level text"
+  },
+  "slightStressText": "🙂 Slightly stressed (2)",
+  "@slightStressText": {
+    "description": "Stress level text"
+  },
+  "moderateStressText": "😐 Moderately stressed (3)",
+  "@moderateStressText": {
+    "description": "Stress level text"
+  },
+  "veryStressedText": "😣 Very stressed (4)",
+  "@veryStressedText": {
+    "description": "Stress level text"
+  },
+  "extremelyStressedText": "😫 Extremely stressed (5)",
+  "@extremelyStressedText": {
+    "description": "Stress level text"
+  },
+
+
+  "rateFoodQuestion": "How healthy were your meals today?",
+  "@rateFoodQuestion": {
+    "description": "Rating the food question"
+  },
+  "veryHealthyNutritionText": "🥗 Very healthy (5)",
+  "@veryHealthyNutritionText": {
+    "description": "Nutrition rating text"
+  },
+  "mostlyHealthyNutritionText": "🍎 Mostly healthy (4)",
+  "@mostlyHealthyNutritionText": {
+    "description": "Nutrition rating text"
+  },
+  "somewhatHealthyNutritionText": "🍝 Somewhat healthy (3)",
+  "@somewhatHealthyNutritionText": {
+    "description": "Nutrition rating text"
+  },
+  "notVeryHealthyNutritionText": "🍔 Not very healthy (2)",
+  "@notVeryHealthyNutritionText": {
+    "description": "Nutrition rating text"
+  },
+  "unhealthyNutritionText": "🍕 Unhealthy (1)",
+  "@unhealthyNutritionText": {
+    "description": "Nutrition rating text"
+  },
+  
+  "rateWaterQuestion": "How much water did you drink today?",
+  "@rateWaterQuestion": {
+    "description": "Rating the water question"
+  },
+  "waterRating1": "🚰 Less than 4 glasses (1)",
+  "@waterRating1": {
+    "description": "Water intake rating text"
+  },
+  "waterRating2": "🚰 4-6 glasses (2)",
+  "@waterRating2": {
+    "description": "Water intake rating text"
+  },
+  "waterRating3": "🚰 6-8 glasses (3)",
+  "@waterRating3": {
+    "description": "Water intake rating text"
+  },
+  "waterRating4": "🚰 More than 8 glasses (4)",
+  "@waterRating4": {
+    "description": "Water intake rating text"
+  },
+
+  "selectSymptomsText": "Which of these symptoms did you feel today?",
+  "@selectSymptomsText": {
+    "description": "Select symptoms text hint"
+  },
+  "bloating": "Bloating",
+  "@bloating": {
+    "description": "Bloating"
+  },
+  "gas": "Gas",
+  "@gas": {
+    "description": "Gas"
+  },
+  "constipation": "Constipation",
+  "@constipation": {
+    "description": "Constipation"
+  },
+  "diarrhea": "Diarrhea",
+  "@diarrhea": {
+    "description": "Diarrhea"
+  },
+  "stomachPain": "Stomach Pain",
+  "@stomachPain": {
+    "description": "Stomach Pain"
+  },
+  "heartburn": "Heartburn",
+  "@heartburn": {
+    "description": "Heartburn"
   }
 }

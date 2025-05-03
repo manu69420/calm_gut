@@ -332,6 +332,34 @@ class _MoodWeek extends StatelessWidget {
           final dates = context.read<MoodTestCubit>().getLastSevenDays();
           final moods = context.read<MoodTestCubit>().state.moods;
           final theme = Theme.of(context);
+          final String mood = switch (AppLocalizations.of(
+            context,
+          )?.localeName) {
+            "ru" => "Настроение",
+            "kk" => "Көңіл-күй",
+            _ => "Mood",
+          };
+          final String stress = switch (AppLocalizations.of(
+            context,
+          )?.localeName) {
+            "ru" => "Стресс",
+            "kk" => "Стресс",
+            _ => "Stress",
+          };
+          final String food = switch (AppLocalizations.of(
+            context,
+          )?.localeName) {
+            "ru" => "Питание",
+            "kk" => "Тамақтану",
+            _ => "Food",
+          };
+          final String water = switch (AppLocalizations.of(
+            context,
+          )?.localeName) {
+            "ru" => "Вода",
+            "kk" => "Су",
+            _ => "Water",
+          };
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -357,25 +385,25 @@ class _MoodWeek extends StatelessWidget {
                               children: [
                                 Text("", style: theme.textTheme.bodyMedium),
                                 Text(
-                                  "Mood",
+                                  mood,
                                   style: theme.textTheme.bodyMedium!.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  "Stress",
+                                  stress,
                                   style: theme.textTheme.bodyMedium!.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  "Food",
+                                  food,
                                   style: theme.textTheme.bodyMedium!.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  "Water",
+                                  water,
                                   style: theme.textTheme.bodyMedium!.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -387,7 +415,7 @@ class _MoodWeek extends StatelessWidget {
                             return Column(
                               spacing: 5,
                               children: [
-                                Text(dates[index].weekName),
+                                Text(dates[index].weekName(context)),
                                 Text(moods[index]?.moodEmoji ?? "  "),
                                 Text(moods[index]?.stressEmoji ?? "  "),
                                 Text(moods[index]?.nutritionEmoji ?? "  "),
@@ -434,9 +462,15 @@ class _DiaryTitleAndSaveButton extends StatelessWidget {
 }
 
 extension on DateTime {
-  String get weekName {
-    const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
-    return days[weekday - 1];
+  String weekName(BuildContext context) {
+    const enDays = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
+    const kkDays = ['Дс', 'Сс', 'Ср', 'Бс', 'Жм', 'Сб', 'Жс'];
+    const ruDays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+    return switch (AppLocalizations.of(context)?.localeName) {
+      "ru" => ruDays[weekday - 1],
+      "kk" => kkDays[weekday - 1],
+      _ => enDays[weekday - 1],
+    };
   }
 }
 

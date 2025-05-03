@@ -46,7 +46,7 @@ class MoodPopupView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Daily Test",
+                      AppLocalizations.of(context)!.dailyTest,
                       style: theme.textTheme.headlineLarge!.copyWith(
                         color: theme.colorScheme.primary,
                       ),
@@ -69,7 +69,9 @@ class MoodPopupView extends StatelessWidget {
                         if (context.mounted) context.go(Routes.diary);
                       } catch (_) {}
                     },
-                    child: Center(child: Text("Submit")),
+                    child: Center(
+                      child: Text(AppLocalizations.of(context)!.save),
+                    ),
                   ),
                 ],
               ),
@@ -92,14 +94,34 @@ class _MoodQuestion extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "How would you rate your mood today?",
+              AppLocalizations.of(context)!.rateMoodQuestion,
               style: theme.textTheme.headlineSmall,
             ),
-            _buildRadioButton("😊 Very Good (5)", 5, context),
-            _buildRadioButton("🙂 Good (4)", 4, context),
-            _buildRadioButton("😐 Neutral (3)", 3, context),
-            _buildRadioButton("😕 Bad (2)", 2, context),
-            _buildRadioButton("😞 Very Bad (1)", 1, context),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.sentimentVeryGoodText,
+              5,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.sentimentGoodText,
+              4,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.sentimentNeutralText,
+              3,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.sentimentBadText,
+              2,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.sentimentVeryBadText,
+              1,
+              context,
+            ),
           ],
         ),
       ),
@@ -135,14 +157,34 @@ class _StressQuestion extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "How stressed did you feel today?",
+              AppLocalizations.of(context)!.rateStressQuestion,
               style: theme.textTheme.headlineSmall,
             ),
-            _buildRadioButton("😌 Not stressed at all (1)", 1, context),
-            _buildRadioButton("🙂 Slightly stressed (2)", 2, context),
-            _buildRadioButton("😐 Moderately stressed (3)", 3, context),
-            _buildRadioButton("😣 Very stressed (4)", 4, context),
-            _buildRadioButton("😫 Extremely stressed (5)", 5, context),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.noStressText,
+              1,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.slightStressText,
+              2,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.moderateStressText,
+              3,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.veryStressedText,
+              4,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.extremelyStressedText,
+              5,
+              context,
+            ),
           ],
         ),
       ),
@@ -178,14 +220,34 @@ class _NutritionQuestion extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "How healthy were your meals today?",
+              AppLocalizations.of(context)!.rateFoodQuestion,
               style: theme.textTheme.headlineSmall,
             ),
-            _buildRadioButton("🥗 Very healthy (5)", 5, context),
-            _buildRadioButton("🍎 Mostly healthy (4)", 4, context),
-            _buildRadioButton("🍝 Somewhat healthy (3)", 3, context),
-            _buildRadioButton("🍔 Not very healthy (2)", 2, context),
-            _buildRadioButton("🍕 Unhealthy (1)", 1, context),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.veryHealthyNutritionText,
+              5,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.mostlyHealthyNutritionText,
+              4,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.somewhatHealthyNutritionText,
+              3,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.notVeryHealthyNutritionText,
+              2,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.unhealthyNutritionText,
+              1,
+              context,
+            ),
           ],
         ),
       ),
@@ -221,13 +283,29 @@ class _WaterQuestion extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "How much water did you drink today?",
+              AppLocalizations.of(context)!.rateWaterQuestion,
               style: theme.textTheme.headlineSmall,
             ),
-            _buildRadioButton("🚰 Less than 4 glasses (1)", 1, context),
-            _buildRadioButton("🚰 4-6 glasses (2)", 2, context),
-            _buildRadioButton("🚰 6-8 glasses (3)", 3, context),
-            _buildRadioButton("🚰 More than 8 glasses (4)", 4, context),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.waterRating1,
+              1,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.waterRating2,
+              2,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.waterRating3,
+              3,
+              context,
+            ),
+            _buildRadioButton(
+              AppLocalizations.of(context)!.waterRating4,
+              4,
+              context,
+            ),
           ],
         ),
       ),
@@ -263,7 +341,7 @@ class _SymptomsQuestion extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "How much water did you drink today?",
+              AppLocalizations.of(context)!.selectSymptomsText,
               style: theme.textTheme.headlineSmall,
             ),
             ...List.generate(
@@ -287,7 +365,7 @@ class _SymptomsQuestion extends StatelessWidget {
           context.read<MoodTestCubit>().onSymptomsChanged(symptom);
         },
       ),
-      title: Text(symptom.name.toSentenceCase()),
+      title: Text(symptom.name(context)),
     );
   }
 }

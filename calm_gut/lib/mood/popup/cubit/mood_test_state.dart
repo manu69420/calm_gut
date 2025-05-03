@@ -6,7 +6,18 @@ enum GutSymptoms {
   constipation,
   diarrhea,
   stomachPain,
-  heartburn,
+  heartburn;
+
+  String name(BuildContext context) {
+    return switch (this) {
+      GutSymptoms.bloating => AppLocalizations.of(context)!.bloating,
+      GutSymptoms.gas => AppLocalizations.of(context)!.gas,
+      GutSymptoms.constipation => AppLocalizations.of(context)!.constipation,
+      GutSymptoms.diarrhea => AppLocalizations.of(context)!.diarrhea,
+      GutSymptoms.stomachPain => AppLocalizations.of(context)!.stomachPain,
+      GutSymptoms.heartburn => AppLocalizations.of(context)!.heartburn,
+    };
+  }
 }
 
 final class MoodTestState extends Equatable {
