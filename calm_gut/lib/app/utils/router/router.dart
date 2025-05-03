@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:calm_gut/app/bloc/app_bloc.dart';
 import 'package:calm_gut/app/utils/router/routes.dart';
+import 'package:calm_gut/article/ui/articles_view.dart';
+import 'package:calm_gut/article/ui/single_article_view.dart';
 import 'package:calm_gut/auth/login/view/login_page.dart';
 import 'package:calm_gut/auth/sign_up/view/sign_up_page.dart';
 import 'package:calm_gut/chat/view/chat_screen.dart';
@@ -41,7 +43,6 @@ GoRouter router(AppBloc bloc) {
             ),
         path: Routes.moodPopup,
       ),
-      // GoRoute(builder: (context, state) => MoodPopup(), path: Routes.moodPopup),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return _ScaffoldWithNavbar(navigationShell: navigationShell);
@@ -59,7 +60,24 @@ GoRouter router(AppBloc bloc) {
             routes: <RouteBase>[
               GoRoute(
                 builder: (context, state) => const DiaryScreen(),
-                path: Routes.diary,
+                path: Routes.diaryRoutes.main,
+                routes: <RouteBase>[
+                  GoRoute(
+                    builder: (context, state) => const ArticlesView(),
+                    path: Routes.diaryRoutes.articles,
+                    routes: <RouteBase>[
+                      GoRoute(
+                        path: '/:articleIndex',
+                        builder:
+                            (context, state) => SingleArticleView(
+                              index: int.parse(
+                                state.pathParameters['articleIndex']!,
+                              ),
+                            ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),

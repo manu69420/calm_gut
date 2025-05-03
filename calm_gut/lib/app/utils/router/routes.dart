@@ -5,6 +5,7 @@ abstract final class Routes {
   static const moodPopup = '/mood-popup';
   static final ChatRoutes chatRoutes = ChatRoutes();
   static final ProfileRoutes profileRoutes = ProfileRoutes();
+  static final DiaryRoutes diaryRoutes = DiaryRoutes();
 }
 
 final class ChatRoutes {
@@ -20,6 +21,13 @@ final class ProfileRoutes {
   );
   GoPath get settings =>
       GoPath(fullPath: '/profile/settings', partialPath: '/settings');
+}
+
+final class DiaryRoutes {
+  String get main => '/';
+  String get articles => '/articles';
+  GoPath article(int index) =>
+      GoPath(fullPath: '/articles/$index', partialPath: '/$index');
 }
 
 class GoPath {

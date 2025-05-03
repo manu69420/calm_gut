@@ -123,5 +123,10 @@
   "save": "Save",
   "@save": {
     "description": "Save"
+  },
+
+  "articles": "Articles", 
+  "@articles": {
+    "description": "Articles"
   }
 }

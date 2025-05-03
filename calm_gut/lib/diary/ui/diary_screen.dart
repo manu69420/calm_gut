@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:calm_gut/app/utils/router/routes.dart';
+import 'package:calm_gut/article/content.dart';
 import 'package:calm_gut/diary/cubit/diary_cubit.dart';
 import 'package:calm_gut/mood/popup/cubit/mood_test_cubit.dart';
-import 'package:calm_gut/mood/popup/ui/mood_popup.dart';
 import 'package:calm_gut/repository/diary_repository/diary_repository.dart';
 import 'package:calm_gut/repository/mood_repository/models/mood_data.dart';
 import 'package:calm_gut/repository/mood_repository/src/mood_repository.dart';
@@ -87,7 +87,6 @@ class _DiaryState extends State<_Diary> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.diary)),
       body: SizedBox(
@@ -99,6 +98,11 @@ class _DiaryState extends State<_Diary> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _DiaryField(controller: controller),
+                Divider(),
+                const SizedBox(height: 10),
+                _Articles(),
+                const SizedBox(height: 10),
+                Divider(),
                 _DailyTestButton(),
                 _MoodWeek(),
                 const SizedBox(height: 10),
@@ -118,9 +122,84 @@ class _DiaryState extends State<_Diary> {
   }
 }
 
+class _Articles extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final content = Content();
+    final String contentText = switch (AppLocalizations.of(
+      context,
+    )?.localeName) {
+      "ru" =>
+        "Нейрографика — это метод рисования, который помогает выразить эмоции, снизить стресс и...",
+      "kk" =>
+        "Нейрография - бұл эмоцияларды білдіруге, стрессті азайтуға және...",
+      _ =>
+        "Neurographics is a drawing method that helps to express emotions, reduce stress and...",
+    };
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: GestureDetector(
+        onTap: () => context.push(Routes.diaryRoutes.articles),
+        child: PhysicalModel(
+          elevation: 1,
+          color: const Color.fromARGB(255, 255, 225, 225),
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.2,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: AssetImage('assets/neurography0_blurred.jpg'),
+                fit: BoxFit.cover,
+                opacity: 0.2,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  content.getTitle(
+                    index: 0,
+                    locale: AppLocalizations.of(context)?.localeName,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  Text(contentText),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _GutHealthScore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final String title = switch (AppLocalizations.of(context)?.localeName) {
+      "ru" => "Показатель здоровья кишечника",
+      "kk" => "Ішек денсаулығының көрсеткіші",
+      _ => "Gut Health Score",
+    };
+    final String resultText = switch (AppLocalizations.of(
+      context,
+    )?.localeName) {
+      "ru" => "Здоровье вашего кишечника сегодня - это: ",
+      "kk" => "Бүгінгі ішектің денсаулығы:",
+      _ => "Your gut health today is: ",
+    };
+    final String promptText = switch (AppLocalizations.of(
+      context,
+    )?.localeName) {
+      "ru" =>
+        "Пройдите ежедневный тест, чтобы узнать свой балл здоровья кишечника",
+      "kk" => "Ішек денсаулығының ұпайын білу үшін күнделікті сынақтан өтіңіз",
+      _ => "Pass the Daily Test to find your Gut Health Score",
+    };
     final theme = Theme.of(context);
     final blocState = context.read<MoodTestCubit>().state;
     return Padding(
@@ -128,12 +207,12 @@ class _GutHealthScore extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Gut Health Score", style: theme.textTheme.titleLarge),
+          Text(title, style: theme.textTheme.titleLarge),
           blocState.passed
               ? Text(
-                "Your gut health today is: ${_getScore(blocState)}/10 ${_getEmoji(_getScore(blocState))}",
+                "$resultText${_getScore(blocState)}/10 ${_getEmoji(_getScore(blocState))}",
               )
-              : Text("Pass the Daily Test to find your Gut Health Score"),
+              : Text(promptText),
         ],
       ),
     );
@@ -197,6 +276,20 @@ class _DiaryField extends StatelessWidget {
 class _DailyTestButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final String alreadyPassedText = switch (AppLocalizations.of(
+      context,
+    )?.localeName) {
+      "ru" => "Ежедневный тест уже пройден",
+      "kk" => "Күнделікті тест тапсырылды",
+      _ => "Daily Test already passed",
+    };
+    final String buttonText = switch (AppLocalizations.of(
+      context,
+    )?.localeName) {
+      "ru" => "Пройдите ежедневный тест",
+      "kk" => "Күнделікті сынақтан өтіңіз",
+      _ => "Pass the Daily Test",
+    };
     final theme = Theme.of(context);
     return ElevatedButton(
       onPressed:
@@ -215,8 +308,8 @@ class _DailyTestButton extends StatelessWidget {
       child: Center(
         child: Text(
           context.read<MoodTestCubit>().state.passed
-              ? "Daily Test already passed"
-              : "Pass the Daily Test",
+              ? alreadyPassedText
+              : buttonText,
         ),
       ),
     );
@@ -226,6 +319,13 @@ class _DailyTestButton extends StatelessWidget {
 class _MoodWeek extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final String last7DaysText = switch (AppLocalizations.of(
+      context,
+    )?.localeName) {
+      "ru" => "Последние 7 дней",
+      "kk" => "Соңғы 7 күн",
+      _ => "Last 7 Days",
+    };
     return BlocBuilder<MoodTestCubit, MoodTestState>(
       builder: (context, state) {
         if (state.moods.isNotEmpty) {
@@ -237,7 +337,7 @@ class _MoodWeek extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("Last 7 Days", style: theme.textTheme.titleLarge),
+                child: Text(last7DaysText, style: theme.textTheme.titleLarge),
               ),
               Card(
                 color: Theme.of(context).colorScheme.surfaceContainer,

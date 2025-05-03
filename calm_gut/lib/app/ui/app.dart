@@ -48,16 +48,8 @@ class AppView extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Innowatt',
       theme: MaterialTheme(TextTheme().apply(fontFamily: 'Montserrat')).light(),
-      darkTheme:
-          MaterialTheme(TextTheme().apply(fontFamily: 'Montserrat')).dark(),
-      // darkTheme: ThemeData(
-      //   fontFamily: 'Montserrat',
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
-      // ),
-      // theme: ThemeData(
-      //   fontFamily: 'Montserrat',
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
-      // ),
+      // darkTheme:
+      //     MaterialTheme(TextTheme().apply(fontFamily: 'Montserrat')).dark(),
       routerConfig: router(context.watch<AppBloc>()),
     );
   }
